@@ -28,6 +28,3 @@ function computeData() {
 }
 function deleteRows() {
 }
-// 2. var element = document.createElement('input') - i potem ustawiasz odpowiednio dla zmiennej element typ, 
-// id, name itd. itp. a na koniec dodajesz do kontenera 
-// poprzez document.getElementById('id_kontenera').appendChild(element).
