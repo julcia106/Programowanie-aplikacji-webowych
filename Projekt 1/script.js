@@ -1,4 +1,7 @@
-function createRows() {
+var createRows;
+var computeData;
+var deleteRows;
+createRows = function () {
     var input = document.getElementById("userInput").value;
     for (var i = 0; i < parseInt(input); i++) {
         var input_1 = document.createElement('input');
@@ -7,8 +10,8 @@ function createRows() {
         input_1.className = "inputToCount";
         document.querySelector('div').appendChild(input_1);
     }
-}
-function computeData() {
+};
+computeData = function () {
     var numbersInInputs = document.getElementsByClassName('inputToCount');
     var sum = 0;
     var test;
@@ -25,6 +28,6 @@ function computeData() {
     document.querySelector('#avg').value = avg.toString();
     document.querySelector('#min').value = min.toString();
     document.querySelector('#max').value = max.toString();
-}
-function deleteRows() {
-}
+};
+deleteRows = function () {
+};

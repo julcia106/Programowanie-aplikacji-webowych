@@ -1,5 +1,8 @@
+let createRows: Function;
+let computeData: Function;
+let deleteRows: Function;
 
-function createRows() {
+createRows= () => {
 
     let input = (<HTMLInputElement>document.getElementById("userInput")).value;
     
@@ -15,7 +18,7 @@ function createRows() {
 
 }
 
-function computeData(){
+computeData = () => {
 
     let numbersInInputs = document.getElementsByClassName('inputToCount');
     let sum: number = 0;
@@ -40,13 +43,8 @@ function computeData(){
     (<HTMLInputElement>document.querySelector('#max')).value = max.toString();
 }
 
-function deleteRows(){
+deleteRows=() => {
 
 }
 
-
-
-// 2. var element = document.createElement('input') - i potem ustawiasz odpowiednio dla zmiennej element typ, 
-// id, name itd. itp. a na koniec dodajesz do kontenera 
-// poprzez document.getElementById('id_kontenera').appendChild(element).
 
