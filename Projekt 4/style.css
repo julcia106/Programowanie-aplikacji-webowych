@@ -10,7 +10,7 @@
 body{
     line-height: 1.5;
     font-weight: 300;
-    background-image: linear-gradient(#22c1c3, #fdbb2d);
+    background-color: lightgray;
     height: 100vh;
 }
 
@@ -20,6 +20,7 @@ body{
     padding: 0 1.5rem;
 }
 
+/* title */
 .note h2{
     font-size: 2.6rem;
     text-align: center;
@@ -28,6 +29,7 @@ body{
     color: seashell;
 }
 
+/* subtitle */
 .note-input h3{
     color: seashell;
 }
@@ -45,6 +47,7 @@ body{
     padding: 0.55rem;   
     margin-bottom: 0.8rem;
     border-radius: 10px;
+    
 }
 
 #note-content{
@@ -73,19 +76,19 @@ btn:focus{
 }
 
 .btn:hover {
-    background: chartreuse;
-    box-shadow: 0 0 8px 0 chartreuse;
+    background: rgb(233, 239, 240);
+    box-shadow: 0 0 8px 0 rgb(233, 239, 240);
 }
 
 .note-list{
     margin: 2rem 0;
-    background-color: blanchedalmond;
+    background-color: whitesmoke;
     padding: 2rem;
     border-radius: 5px;
 }
 
 .note-item{
-    background: whitesmoke;
+    background: lavender;
     margin: 1rem;
     padding: 1.5rem;
     border-radius: 10px;
@@ -102,9 +105,9 @@ btn:focus{
 
 .note-item .btn{
     margin-top: 0.8rem;
-    background: pink;
-    border: 2px solid coral;
-    color:coral;
+    background: whitesmoke;
+    border: 2px solid whitesmoke;
+    color: green;
 }
 
 @media (min-width: 992px){
