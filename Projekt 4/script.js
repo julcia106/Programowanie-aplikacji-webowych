@@ -50,7 +50,6 @@ function addNewNote(){
   
 }
 
-
 // input validation
 
 function validateInput(title, content){
