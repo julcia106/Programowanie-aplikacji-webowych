@@ -5,6 +5,8 @@ body{
 .city-el{
     position: relative;
     padding: 25px;
+    border: solid lightgrey;
+    margin: 5px;
 }
 
 .city-el:hover .city-close{
@@ -25,4 +27,8 @@ body{
 
 .city-name{
     font-size: 18px;
+}
+
+.city-other{
+    font-size: 13px;
 }

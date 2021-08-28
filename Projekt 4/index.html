@@ -5,10 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/42277f946d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css"/> <!-- 'classic' theme -->
+
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
+    
     <div class="note">
         <h2>Note Taking App</h2>
         <div class="note-input">
@@ -16,12 +19,13 @@
             <div class="note-wrapper">
                 <input type = "text" id = "note-title" placeholder="Title of your note">
                 <textarea id="note-content" placeholder="Write your note here..." 
-                rows="5"></textarea> <input type="color" id="color-picker" />
+                rows="5"></textarea>
                 
                 <button id="add-note-btn" class = "btn" type = "button">
                     <span><i class="fas fa-plus"></i></span>
                     Add note
-                </button>
+                </button> 
+                <div class="color-picker"></div>
             </div>
         </div>
         <div class="note-list">
@@ -32,6 +36,8 @@
             Delete All
         </button>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

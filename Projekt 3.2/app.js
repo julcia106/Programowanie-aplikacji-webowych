@@ -2,16 +2,16 @@ const API_KEY = `f15b0bd90f5940c496c160503212208`;
 const API_URL = `http://api.weatherapi.com/v1/current.json?key=${API_KEY}`;
 
 class App {
-
     constructor(el){
         this.el = el;
         const citiesJson = localStorage.getItem('cities');
         let cities = [];
 
+        //retrieve data from local storage
         if(citiesJson){
             cities = JSON.parse(citiesJson);
         }
-        this.cities = this.cities.map(c => new City(c.name, this));
+        this.cities = cities.map(c => new City(c.name, this));
         this.render();
     }
 
@@ -23,13 +23,14 @@ class App {
 
     removeCity(c){
         // Way 1
-        const index = this.cities.findIndex(city => city.name === c.name);
-        this.cities.splice(index,1);
+        //const index = this.cities.findIndex(city => city.name === c.name);
+        //this.cities.splice(index,1);
 
         // Way 2
-        //this.cities = this.cities.filter(city => city.name !== c.name);
+        this.cities = this.cities.filter(city => city.name !== c.name);
 
         this.render();
+        this.saveIntoStorage();
     }
 
     render(){
@@ -51,24 +52,50 @@ class City{
     async getWeather(){
         const res = await fetch(`${API_URL}&q=${this.name}`)
         .then(response => response.json())
-        // jak chcesz wyciagnac inne wartosci to 18 min
-
         return res.current.temp_c;
+    }
 
+    async getPressure(){
+        const res = await fetch(`${API_URL}&q=${this.name}`)
+        .then(response => response.json())
+
+        return res.current.pressure_mb;
+    }
+
+    async getHumidity(){
+        const res = await fetch(`${API_URL}&q=${this.name}`)
+        .then(response => response.json())
+
+        return res.current.humidity;
+    }
+
+    async getCondition(){
+        const res = await fetch(`${API_URL}&q=${this.name}`)
+        .then(response => response.json())
+
+        return res.current.condition.icon;
     }
 
     async render(ctr){
         const temp = await this.getWeather();
+        const pressure = await this.getPressure();
+        const humidity = await this.getHumidity();
+        const icon = await this.getCondition();
+
         const cityEl = document.createElement('div');
         cityEl.className = 'city-el d-flex flex-column align-items-center'
         cityEl.innerHTML = `
-            <span class = "city-temp>${temp}℃</span>
-            <span class = "city-name>${this.name}</span>
+            <span class = "city-temp">${temp}℃</span>
+            <span class = "city-name">${this.name}</span>
+            <span class = "city-other">${pressure} mbar</span>
+            <span class = "city-other">${humidity}%</span>
+            <span><img src=${icon}></span>
+            
             <span class = "city-close"><i class="fas fa-times"></i></span>
         `
         ctr.appendChild(cityEl);
-        const close = cityEl.querySelector('city-close');
-        close.addEventListener('click', this.app.removeCity(this)) 
+        const close = cityEl.querySelector('.city-close');
+        close.addEventListener('click',() => this.app.removeCity(this)) 
     }
 
     toJSON(){
@@ -97,7 +124,6 @@ input.addEventListener('keypress', (ev) =>{
 
 modal.addEventListener('show.bs.modal', () => {
     input.focus();
-
 })
 
 function addCity(){
