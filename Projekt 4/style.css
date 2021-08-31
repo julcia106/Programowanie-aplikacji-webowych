@@ -105,6 +105,7 @@ btn:focus{
 
 .note-item .btn{
     margin-top: 0.8rem;
+    margin: 2px;
     background: whitesmoke;
     border: 2px solid whitesmoke;
     color: green;

@@ -1,134 +1,134 @@
-const API_KEY = `f15b0bd90f5940c496c160503212208`;
-const API_URL = `http://api.weatherapi.com/v1/current.json?key=${API_KEY}`;
+// const API_KEY = `f15b0bd90f5940c496c160503212208`;
+// const API_URL = `http://api.weatherapi.com/v1/current.json?key=${API_KEY}`;
 
-class App {
-    constructor(el){
-        this.el = el;
-        const citiesJson = localStorage.getItem('cities');
-        let cities = [];
+// class App {
+//     constructor(el){
+//         this.el = el;
+//         const citiesJson = localStorage.getItem('cities');
+//         let cities = [];
 
-        //retrieve data from local storage
-        if(citiesJson){
-            cities = JSON.parse(citiesJson);
-        }
-        this.cities = cities.map(c => new City(c.name, this));
-        this.render();
-    }
+//         //retrieve data from local storage
+//         if(citiesJson){
+//             cities = JSON.parse(citiesJson);
+//         }
+//         this.cities = cities.map(c => new City(c.name, this));
+//         this.render();
+//     }
 
-    addCity(c){
-        this.cities.push(c);
-        this.render();
-        this.saveIntoStorage();
-    }
+//     addCity(c){
+//         this.cities.push(c);
+//         this.render();
+//         this.saveIntoStorage();
+//     }
 
-    removeCity(c){
-        // Way 1
-        //const index = this.cities.findIndex(city => city.name === c.name);
-        //this.cities.splice(index,1);
+//     removeCity(c){
+//         // Way 1
+//         //const index = this.cities.findIndex(city => city.name === c.name);
+//         //this.cities.splice(index,1);
 
-        // Way 2
-        this.cities = this.cities.filter(city => city.name !== c.name);
+//         // Way 2
+//         this.cities = this.cities.filter(city => city.name !== c.name);
 
-        this.render();
-        this.saveIntoStorage();
-    }
+//         this.render();
+//         this.saveIntoStorage();
+//     }
 
-    render(){
-        this.el.innerHTML = '';
-        this.cities.forEach(city => city.render(this.el))
-    }
+//     render(){
+//         this.el.innerHTML = '';
+//         this.cities.forEach(city => city.render(this.el))
+//     }
 
-    saveIntoStorage(){
-        localStorage.setItem('cities', JSON.stringify(this.cities))
-    }
-}
+//     saveIntoStorage(){
+//         localStorage.setItem('cities', JSON.stringify(this.cities))
+//     }
+// }
 
-class City{
-    constructor(name, app){
-        this.name = name;
-        this.app = app;
-    }
+// class City{
+//     constructor(name, app){
+//         this.name = name;
+//         this.app = app;
+//     }
 
-    async getWeather(){
-        const res = await fetch(`${API_URL}&q=${this.name}`)
-        .then(response => response.json())
-        return res.current.temp_c;
-    }
+//     async getWeather(){
+//         const res = await fetch(`${API_URL}&q=${this.name}`)
+//         .then(response => response.json())
+//         return res.current.temp_c;
+//     }
 
-    async getPressure(){
-        const res = await fetch(`${API_URL}&q=${this.name}`)
-        .then(response => response.json())
+//     async getPressure(){
+//         const res = await fetch(`${API_URL}&q=${this.name}`)
+//         .then(response => response.json())
 
-        return res.current.pressure_mb;
-    }
+//         return res.current.pressure_mb;
+//     }
 
-    async getHumidity(){
-        const res = await fetch(`${API_URL}&q=${this.name}`)
-        .then(response => response.json())
+//     async getHumidity(){
+//         const res = await fetch(`${API_URL}&q=${this.name}`)
+//         .then(response => response.json())
 
-        return res.current.humidity;
-    }
+//         return res.current.humidity;
+//     }
 
-    async getCondition(){
-        const res = await fetch(`${API_URL}&q=${this.name}`)
-        .then(response => response.json())
+//     async getCondition(){
+//         const res = await fetch(`${API_URL}&q=${this.name}`)
+//         .then(response => response.json())
 
-        return res.current.condition.icon;
-    }
+//         return res.current.condition.icon;
+//     }
 
-    async render(ctr){
-        const temp = await this.getWeather();
-        const pressure = await this.getPressure();
-        const humidity = await this.getHumidity();
-        const icon = await this.getCondition();
+//     async render(ctr){
+//         const temp = await this.getWeather();
+//         const pressure = await this.getPressure();
+//         const humidity = await this.getHumidity();
+//         const icon = await this.getCondition();
 
-        const cityEl = document.createElement('div');
-        cityEl.className = 'city-el d-flex flex-column align-items-center'
-        cityEl.innerHTML = `
-            <span class = "city-temp">${temp}℃</span>
-            <span class = "city-name">${this.name}</span>
-            <span class = "city-other">${pressure} mbar</span>
-            <span class = "city-other">${humidity}%</span>
-            <span><img src=${icon}></span>
+//         const cityEl = document.createElement('div');
+//         cityEl.className = 'city-el d-flex flex-column align-items-center'
+//         cityEl.innerHTML = `
+//             <span class = "city-temp">${temp}℃</span>
+//             <span class = "city-name">${this.name}</span>
+//             <span class = "city-other">${pressure} mbar</span>
+//             <span class = "city-other">${humidity}%</span>
+//             <span><img src=${icon}></span>
             
-            <span class = "city-close"><i class="fas fa-times"></i></span>
-        `
-        ctr.appendChild(cityEl);
-        const close = cityEl.querySelector('.city-close');
-        close.addEventListener('click',() => this.app.removeCity(this)) 
-    }
+//             <span class = "city-close"><i class="fas fa-times"></i></span>
+//         `
+//         ctr.appendChild(cityEl);
+//         const close = cityEl.querySelector('.city-close');
+//         close.addEventListener('click',() => this.app.removeCity(this)) 
+//     }
 
-    toJSON(){
-        return {name: this.name};
-    }
-}
+//     toJSON(){
+//         return {name: this.name};
+//     }
+// }
 
-const app = new App(document.querySelector('.weather-locations'));
+// const app = new App(document.querySelector('.weather-locations'));
 
-const modal = document.querySelector('#addCityModal');
-const bootstrapModal = new bootstrap.Modal(modal, {
-    keyboard: false
-})
+// const modal = document.querySelector('#addCityModal');
+// const bootstrapModal = new bootstrap.Modal(modal, {
+//     keyboard: false
+// })
 
-const input = document.querySelector('#cityName');
-const saveBtn = document.querySelector('#saveCity');
-saveBtn.addEventListener('click', () => {
-    addCity();
-})
+// const input = document.querySelector('#cityName');
+// const saveBtn = document.querySelector('#saveCity');
+// saveBtn.addEventListener('click', () => {
+//     addCity();
+// })
 
-input.addEventListener('keypress', (ev) =>{
-    if(ev.key === 'Enter'){
-        addCity();
-    }
-})
+// input.addEventListener('keypress', (ev) =>{
+//     if(ev.key === 'Enter'){
+//         addCity();
+//     }
+// })
 
-modal.addEventListener('show.bs.modal', () => {
-    input.focus();
-})
+// modal.addEventListener('show.bs.modal', () => {
+//     input.focus();
+// })
 
-function addCity(){
-    const city = new City(input.value, app);
-    app.addCity(city);
-    bootstrapModal.hide();
-    input.value = '';
-}
+// function addCity(){
+//     const city = new City(input.value, app);
+//     app.addCity(city);
+//     bootstrapModal.hide();
+//     input.value = '';
+// }

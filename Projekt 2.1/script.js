@@ -16,3 +16,25 @@ function removeTransition(e) {
 var keys = document.querySelectorAll('.key');
 keys.forEach(function (key) { return key.addEventListener('transitionend', removeTransition); });
 window.addEventListener('keydown', playSound);
+
+//kanał- tablica gdzie przechowam sobie co kliknęłam i kiedy
+
+class RecordData {     key: string;     //t... autorstwa Kozioł Dominik
+
+    class RecordData {
+        key: string;
+        //timeFromWebsiteInit: Is timestamp, which contains value how many miliseconds pass from website init
+        timeFromWebsiteInit: number;
+        //timeFromPreviousSong: Is time, which passed since previous sound (pattern: timeFromWebsiteInit[i] - timeFromWebsiteInit[i - 1] + timeFromPreviousSong[i - 1])
+        timeFromPreviousSong: number;
+    }
+
+setTimeout(() => this.playSound(element.key), element.timeFromPreviousSong)
+
+public playChanel(chanelNumber: number): void {
+    if (this.chanelNumber) {
+        this.chanelDictionary[chanelNumber].forEach(element => {
+            setTimeout(() => this.playSound(element.key), element.timeFromPreviousSong)
+        });
+    }
+}
