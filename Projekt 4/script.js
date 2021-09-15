@@ -12,6 +12,7 @@ function eventListeners(){
     document.getElementById("add-note-btn").addEventListener("click", addNewNote); 
     
     noteListDiv.addEventListener("click", deleteNote);
+    noteListDiv.addEventListener("click", editNote);
     
    document.getElementById("delete-all-btn").addEventListener("click", deleteAllNotes);
    
@@ -74,6 +75,10 @@ function createNote(noteItem){
           <span><i class = "fas fa-trash"></i></span>
           Delete
           </buttton>
+          <button type = "button" class ="btn edit-note-btn">
+          <span><i class = "far fa-edit"></i></span>
+          Edit 
+          </button>
     `;
     noteListDiv.appendChild(div);
   }
@@ -91,6 +96,13 @@ function displayNotes(){
       createNote(item);
     });
   }
+
+
+// edit note
+function editNote(e){
+  e.target.parentElement.contentEditable = true; 
+   
+}
 
 // delete note
 function deleteNote(e){
@@ -168,3 +180,5 @@ $(document).ready(function() {
       })
   );
 });
+
+//input type color
