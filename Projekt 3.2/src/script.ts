@@ -1,41 +1,39 @@
 const API_KEY = `f15b0bd90f5940c496c160503212208`;
 const API_URL = `http://api.weatherapi.com/v1/current.json?key=${API_KEY}`;
 
-class App {
-    constructor(el){
-        this.el = el;
+class WeatherApp{
+
+    public cities: City[] = [];
+    
+    constructor(public element:any){
+
+        this.element = element;
         const citiesJson = localStorage.getItem('cities');
-        let cities = [];
+        let cities: City[] = [];
 
         //retrieve data from local storage
-        if(citiesJson){
-            cities = JSON.parse(citiesJson);
-        }
-        this.cities = cities.map(c => new City(c.name, this));
+        if(citiesJson) this.cities = JSON.parse(citiesJson);
+        this.cities = this.cities.map(c => new City(c.name, this));
         this.render();
     }
 
-    addCity(c){
+    public addCity(c: any): void{
         this.cities.push(c);
         this.render();
         this.saveIntoStorage();
     }
 
-    removeCity(c){
-        // Way 1
-        //const index = this.cities.findIndex(city => city.name === c.name);
-        //this.cities.splice(index,1);
+    public removeCity(c: any): void{
 
-        // Way 2
-        this.cities = this.cities.filter(city => city.name !== c.name);
-
+        this.cities = this.cities.filter(city => city.name !== c.name); //pierwsze city to parametr funkcji => return
+        //The filter() method filters an array according to provided criteria, returning a new array containing the filtered items.
         this.render();
         this.saveIntoStorage();
     }
 
-    render(){
-        this.el.innerHTML = '';
-        this.cities.forEach(city => city.render(this.el))
+    public render(): void{
+        this.element.innerHTML = '';
+        this.cities.forEach(city => city.render(this.element))
     }
 
     saveIntoStorage(){
@@ -44,39 +42,40 @@ class App {
 }
 
 class City{
-    constructor(name, app){
+
+    constructor(public name: any, public app: any){ //sprawdz czy any
         this.name = name;
         this.app = app;
     }
 
-    async getWeather(){
+    public async getWeather(){ // sprawdź typ!!
         const res = await fetch(`${API_URL}&q=${this.name}`)
-        .then(response => response.json())
+        .then((response:any) => response.json())
         return res.current.temp_c;
     }
 
-    async getPressure(){
+    public async getPressure(){
         const res = await fetch(`${API_URL}&q=${this.name}`)
-        .then(response => response.json())
+        .then((response:any) => response.json()) // i tutaj tak samo! typ
 
         return res.current.pressure_mb;
     }
 
-    async getHumidity(){
+    public async getHumidity(){
         const res = await fetch(`${API_URL}&q=${this.name}`)
-        .then(response => response.json())
+        .then((response:any) => response.json())
 
         return res.current.humidity;
     }
 
-    async getCondition(){
+    public async getCondition(){
         const res = await fetch(`${API_URL}&q=${this.name}`)
-        .then(response => response.json())
+        .then((response:any) => response.json())
 
         return res.current.condition.icon;
     }
 
-    async render(ctr){
+    public async render(ctr){
         const temp = await this.getWeather();
         const pressure = await this.getPressure();
         const humidity = await this.getHumidity();
@@ -103,7 +102,7 @@ class City{
     }
 }
 
-const app = new App(document.querySelector('.weather-locations'));
+// Pierwsze wyszukiwanie
 
 const modal = document.querySelector('#addCityModal');
 const bootstrapModal = new bootstrap.Modal(modal, {
@@ -116,7 +115,7 @@ saveBtn.addEventListener('click', () => {
     addCity();
 })
 
-input.addEventListener('keypress', (ev) =>{
+input.addEventListener('keypress', (ev:any) =>{
     if(ev.key === 'Enter'){
         addCity();
     }
@@ -126,9 +125,11 @@ modal.addEventListener('show.bs.modal', () => {
     input.focus();
 })
 
-function addCity(){
+function addCity(): void{
     const city = new City(input.value, app);
     app.addCity(city);
     bootstrapModal.hide();
     input.value = '';
 }
+
+const app = new WeatherApp(document.querySelector('.weather-locations'));

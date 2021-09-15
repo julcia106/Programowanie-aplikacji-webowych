@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRUM KIT</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container">
+    <div class="audioInfo">
+        <div class="key"><kbd>A</kbd><span>clap</span></div>
+        <div class="key"><kbd>S</kbd><span>boom</span></div>
+        <div class="key"><kbd>D</kbd><span>hihat</span></div>
+        <div class="key"><kbd>F</kbd><span>kick</span></div>
+        <div class="key"><kbd>G</kbd><span>openhat</span></div>
+        <div class="key"><kbd>H</kbd><span>ride</span></div>
+        <div class="key"><kbd>J</kbd><span>snare</span></div>
+        <div class="key"><kbd>I</kbd><span>tom</span></div>
+    </div>
+    <div class="channels">
+        <div class="recordChannel">
+            <button id="recordChannel1">rec</button>
+            <button id="recordChannel2">rec</button>
+            <button id="recordChannel3">rec</button>
+            <button id="recordChannel4">rec</button>
+        </div>
+        <div class="playchannel">
+            <button id="playChannel1">Play ch1</button>
+            <button id="playChannel2">Play ch2</button>
+            <button id="playChannel3">Play ch3</button>
+            <button id="playChannel4">Play ch4</button>
+        </div>        
+    </div>
+    <div class="timer">
+        <button class="timer1">3sec</button>
+        <button class="timer2">6sec</button>
+        <button class="timer3">10sec</button>
+    </div>
+    <div class="audioSource">
+        <audio src="../sounds/clap.wav" data-audio="clap"></audio>
+        <audio src="../sounds/boom.wav" data-audio="boom"></audio>
+        <audio src="../sounds/hihat.wav" data-audio="hihat"></audio>
+        <audio src="../sounds/kick.wav" data-audio="kick"></audio>
+        <audio src="../sounds/openhat.wav" data-audio="openhat"></audio>
+        <audio src="../sounds/ride.wav" data-audio="ride"></audio>
+        <audio src="../sounds/snare.wav" data-audio="snare"></audio>
+        <audio src="../sounds/tink.wav" data-audio="tink"></audio>
+        <audio src="../sounds/tom.wav" data-audio="tom"></audio>
+    </div>   
+    </main>
+    <script src="../build/index.js"></script>
+</body>
+</html>

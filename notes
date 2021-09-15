@@ -1,0 +1,29 @@
+class Drumkit{
+
+    constructor(){
+
+    }
+
+    public playSound(ev:any): void {
+        let audio = document.querySelector<HTMLAudioElement>("audio[data-key=\"" + ev.keyCode + "\"]");
+        let key = document.querySelector<HTMLAudioElement>(".key[data-key=\"" + ev.keyCode + "\"]");
+        if (!audio)
+            return; //stop the function from running all together
+        audio.currentTime = 0; //rewind to the start
+        audio.play();
+        key.classList.add('playing');
+    }
+
+    public removeTransition(e): void {
+        if (e.propertyName !== 'transform')
+            return; //skip it if it's not a transform
+        console.log(e.propertyName);
+        e.classList.remove('playing');
+    }
+}
+
+var keys = document.querySelectorAll('.key');
+keys.forEach(function (key) { return key.addEventListener('transitionend', removeTransition); });
+window.addEventListener('keydown', playSound);
+
+// tsc --watch src/index.ts --out build/index.js

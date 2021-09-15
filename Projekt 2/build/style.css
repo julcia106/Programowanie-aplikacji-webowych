@@ -1,0 +1,87 @@
+body {
+    background-image: url(../image/james-sutton-dQ5G0h7sLno-unsplash\ \(1\).jpg);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.audioInfo{
+    display: flex;
+}
+
+kbd {
+    display: block;
+    font-size: 40px;
+}
+
+.key{
+    border: 4px solid black;
+    border-radius: 5px;
+    margin: 1rem;
+    font-size: 1.5rem;
+    padding: 1rem .5rem;
+    transition: all .07s;
+    width: 100px;
+    text-align: center;
+    color: white;
+    background: rgba(0, 0, 0, 0.4);
+    text-shadow: 0 0 5px black;
+}
+.key strong {
+    text-transform: uppercase;
+    padding-top: 5px;
+}
+
+.channels{
+    display: flex;
+    height: auto;
+    width: 10%;
+    margin-bottom: 20px;
+}
+
+.channels button{
+    background-color: rgb(85, 185, 19);
+    color: white;
+    padding: 10px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #333029;
+    cursor: pointer;
+    margin:5px;
+    width: 100px;
+}
+
+.recordChannel button{
+    background-color: rgb(218, 27, 27);
+    color: white;
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #333029;
+    outline: none;
+}
+.recordChannel button.active{
+    background-color: rgb(129, 17, 17);
+}
+
+.timer button{
+	border: 1px solid #616161;
+    background-color: #61616122;
+	border-radius:5px;
+	border:1px solid #333029;
+	cursor:pointer;
+	color:#000;
+	font-family:Arial;
+	font-size:14px;
+	font-weight:bold;
+	padding:12px 16px;
+	text-decoration:none;
+}
+.timer button:hover {	
+    background-color: #b1b1b1;
+}
+.timer button.active{
+    background-color:#b1b1b1;
+}
