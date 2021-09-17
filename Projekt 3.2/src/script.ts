@@ -12,13 +12,13 @@ class WeatherApp{
         let cities: City[] = [];
 
         //retrieve data from local storage
-        if(citiesJson) this.cities = JSON.parse(citiesJson);
+        if(citiesJson) this.cities = JSON.parse(citiesJson); //zamienia dane z API na bardziej przystępne do np. wyświetlenia np. cities.name 
         this.cities = this.cities.map(c => new City(c.name, this));
         this.render();
     }
 
-    public addCity(c: any): void{
-        this.cities.push(c);
+    public addCity(city: any): void{
+        this.cities.push(city);
         this.render();
         this.saveIntoStorage();
     }
@@ -43,39 +43,41 @@ class WeatherApp{
 
 class City{
 
-    constructor(public name: any, public app: any){ //sprawdz czy any
+    constructor(public name: any, public app: any){
         this.name = name;
         this.app = app;
     }
 
-    public async getWeather(){ // sprawdź typ!!
+    public async getWeather(): Promise<any>{
         const res = await fetch(`${API_URL}&q=${this.name}`)
         .then((response:any) => response.json())
+
         return res.current.temp_c;
     }
 
-    public async getPressure(){
-        const res = await fetch(`${API_URL}&q=${this.name}`)
-        .then((response:any) => response.json()) // i tutaj tak samo! typ
+    public async getPressure(): Promise<any>{
+        const res = await fetch(`${API_URL}&q=${this.name}`) // fetch pobiera dane z API(GET), zwraca obietnicę
+        .then((response:any) => response.json()) //.then ->reaguje na zakończenie połączenia, oczekujemy formatu json
+        // może być inny, np. text()
 
         return res.current.pressure_mb;
     }
 
-    public async getHumidity(){
+    public async getHumidity(): Promise<any>{
         const res = await fetch(`${API_URL}&q=${this.name}`)
         .then((response:any) => response.json())
 
         return res.current.humidity;
     }
 
-    public async getCondition(){
+    public async getCondition(): Promise<any>{
         const res = await fetch(`${API_URL}&q=${this.name}`)
         .then((response:any) => response.json())
 
         return res.current.condition.icon;
     }
 
-    public async render(ctr){
+    public async render(ctr: any){
         const temp = await this.getWeather();
         const pressure = await this.getPressure();
         const humidity = await this.getHumidity();

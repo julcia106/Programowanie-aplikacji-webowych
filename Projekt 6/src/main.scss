@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  body {
+    line-height: 1.5;
+    font-weight: 300;
+    background-color: lightgray;
+    height: 100vh;
+  }
+  
+  .container{
+    max-width: 1000px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+  }
+
+  .input-box{
+    font-size: 1.8rem;
+    text-align: center;
+    opacity: 0.8;
+    margin-bottom: 1rem;
+    color: seashell;
+
+    border: 2px solid;
+    border-radius: 5px;
+    padding: 10px;
+    //display: flex;
+    flex-direction: column;
+
+    h1{
+      text-align: center;
+      padding-bottom: 20px;
+    }
+    
+    button{
+      background-color: whitesmoke;
+      border: 2px solid whitesmoke;
+      color: black;
+      padding: 0.55rem 0;
+      width: 120px;
+      border-radius: 2px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.5s ease-in-out;
+    }
+  }
+
+  input, input::placeholder{
+    width: 100%;
+    border: 2px solid cornsilk;
+    font-size: 1.05rem;
+    padding: 0.55rem;   
+    margin-bottom: 0.8rem;
+    border-radius: 10px;
+  }
+  .city{
+    background: lavender;
+    margin: 1rem;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 0 7px 0 whitesmoke;
+  }
+  
+  .note{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    background-color: white;
+    padding: 10px;
+    margin:10px;
+    position: relative;
+    
+    &-title{
+      font-size: 1.4rem;
+      padding: 8px 0;
+    }
+    &-description{
+      font-size: 1rem;
+      padding-bottom: 8px;
+    }
+    &-date{
+      font-size: 1rem;
+      align-self: flex-end;
+    }
+    button{
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: #fff;
+      border: 1px solid #262626;
+      padding: 0;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+    button:last-child{
+      left: 35px;
+      background-color: #fff;
+      border: 1px solid #262626;
+      padding: 0;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+  }
+  
+  .city__box--place{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+
+    &-text{
+      font-size: 1.2rem;
+      font-weight: 300;
+    }  
+    &-country{
+      font-size: 1.6rem;
+      font-weight: bold;
+    }
+  }

@@ -9,14 +9,12 @@ var tinkSound;
 var tomSound;
 var btnRecordChannel = document.querySelectorAll(".recordChannel button");
 var btnPlayChannel = document.querySelectorAll(".playchannel button");
-var btnTimer1 = document.querySelector(".timer1");
-var btnTimer2 = document.querySelector(".timer2");
-var btnTimer3 = document.querySelector(".timer3");
-var channel1 = [];
+var btnTimer = document.querySelector(".timer");
+var channel1 = []; //kanał- tablica gdzie przechowuję co kliknęłam i kiedy
 var channel2 = [];
 var channel3 = [];
 var channel4 = [];
-var recordTime1;
+var recordTime1; //ile trwało nagranie
 var recordTime2;
 var recordTime3;
 var recordTime4;
@@ -42,20 +40,10 @@ function appStart() {
     setTimer();
 }
 function setTimer() {
-    timer = 3000;
+    timer = 10000;
     removeActive();
-    btnTimer1.classList.add("active");
-    btnTimer1.addEventListener("click", function () {
-        timer = 3000;
-        removeActive();
-        this.classList.add("active");
-    });
-    btnTimer2.addEventListener("click", function () {
-        timer = 6000;
-        removeActive();
-        this.classList.add("active");
-    });
-    btnTimer3.addEventListener("click", function () {
+    btnTimer.classList.add("active");
+    btnTimer.addEventListener("click", function () {
         timer = 10000;
         removeActive();
         this.classList.add("active");
@@ -91,7 +79,7 @@ function onPlayChannel1(elem) {
 }
 function record(ev) {
     if (recordingChannel == 1) {
-        recordTime1 = ev.timeStamp;
+        recordTime1 = ev.timeStamp; //timestamp zwraca czas w milisekundach
         channel1.length = 0;
     }
     else if (recordingChannel == 2) {
@@ -111,7 +99,7 @@ function onKeyDown(ev, elem) {
     var key = ev.key;
     if (recordingChannel == 1) {
         var time = ev.timeStamp - recordTime1;
-        channel1.push({ key: key, time: time });
+        channel1.push({ key: key, time: time }); //który klawisz nacisnęłam o jakim czasie
     }
     else if (recordingChannel == 2) {
         var time = ev.timeStamp - recordTime2;

@@ -1,29 +1,28 @@
-class Drumkit{
+The json() method of the Response interface takes a Response stream and reads it to completion. 
+It returns a promise which resolves with the result of parsing the body text as JSON.
+Note that despite the method being named json(), 
+the result is not JSON but is instead the result of taking JSON as input and parsing it to produce a JavaScript object
+The + operator returns the numeric representation of the object
 
-    constructor(){
+tsc --watch src/index.ts --out build/index.js
 
-    }
+package.json - configure and setup project, można tu dodać skrypty, zależności, wersję, opis itd
+aby stworzyć wpisuję npm init --y ( z 'y' nie trzeba ustawiać samemu tylko defaultowe wartości)
 
-    public playSound(ev:any): void {
-        let audio = document.querySelector<HTMLAudioElement>("audio[data-key=\"" + ev.keyCode + "\"]");
-        let key = document.querySelector<HTMLAudioElement>(".key[data-key=\"" + ev.keyCode + "\"]");
-        if (!audio)
-            return; //stop the function from running all together
-        audio.currentTime = 0; //rewind to the start
-        audio.play();
-        key.classList.add('playing');
-    }
+npm i express => tworzy node_modules folder, tam wszystkie zależności itd
 
-    public removeTransition(e): void {
-        if (e.propertyName !== 'transform')
-            return; //skip it if it's not a transform
-        console.log(e.propertyName);
-        e.classList.remove('playing');
-    }
-}
+The webpack-dev-server provides you with a rudimentary web server and the ability to use live reloading.
+Use webpack with a development server that provides live reloading. This should be used for development only
 
-var keys = document.querySelectorAll('.key');
-keys.forEach(function (key) { return key.addEventListener('transitionend', removeTransition); });
-window.addEventListener('keydown', playSound);
+contentBase => Poinformuj serwer, skąd ma udostępniać zawartość. Jest to konieczne tylko wtedy, gdy chcesz obsługiwać pliki statyczne.
 
-// tsc --watch src/index.ts --out build/index.js
+package-lock.json => trzyma w sobie drzewo wszystkich, wszystkich zależności!(child of child) jeżeli np. package.json ma jakieś to one tam też będą
+
+Obecność pliku tsconfig.json w katalogu wskazuje, że katalog jest katalogiem głównym projektu TypeScript. Plik tsconfig.json określa pliki główne i opcje kompilatora wymagane do skompilowania projektu.
+
+const res = await fetch(`${API_URL}&q=${this.name}`) // fetch pobiera dane z API(GET), zwraca obietnicę
+        .then((response:any) => response.json()) //.then ->reaguje na zakończenie połączenia, oczekujemy formatu json
+
+JSON.stringify() zamienia jakiś obiekt czy wartość na JSON stringa
+odwrotnie działa
+JSON.parse()- który z formatu JSON wyciąga pojedyncze wartości

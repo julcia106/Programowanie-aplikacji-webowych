@@ -10,17 +10,15 @@ let tomSound: HTMLAudioElement;
 
 const btnRecordChannel: any = document.querySelectorAll(".recordChannel button");
 const btnPlayChannel: any = document.querySelectorAll(".playchannel button");
-const btnTimer1: HTMLButtonElement = document.querySelector(".timer1");
-const btnTimer2: HTMLButtonElement = document.querySelector(".timer2");
-const btnTimer3: HTMLButtonElement = document.querySelector(".timer3");
+const btnTimer: HTMLButtonElement = document.querySelector(".timer");
 
 
-const channel1: any[] = [];
+const channel1: any[] = []; //kanał- tablica gdzie przechowuję co kliknęłam i kiedy
 const channel2: any[] = [];
 const channel3: any[] = [];
 const channel4: any[] = [];
 
-let recordTime1: number;
+let recordTime1: number; //ile trwało nagranie
 let recordTime2: number;
 let recordTime3: number;
 let recordTime4: number;
@@ -44,21 +42,11 @@ function appStart(): void {
     getAudioTags();
     setTimer();
 }
-function setTimer() {
-    timer = 3000;
+function setTimer(): void {
+    timer = 10000;
     removeActive();
-    btnTimer1.classList.add("active");
-    btnTimer1.addEventListener("click", function () {
-        timer = 3000;
-        removeActive();
-        this.classList.add("active");
-    })
-    btnTimer2.addEventListener("click", function () {
-        timer = 6000;
-        removeActive();
-        this.classList.add("active");
-    })
-    btnTimer3.addEventListener("click", function () {
+    btnTimer.classList.add("active");
+    btnTimer.addEventListener("click", function () {
         timer = 10000;
         removeActive();
         this.classList.add("active");
@@ -71,7 +59,7 @@ function removeActive() {
     });
 }
 
-function onPlayChannel1(elem) {
+function onPlayChannel1(elem): void {
     if (elem == 1) {
         channel1.forEach(sound => {
             setTimeout(() => playSound(sound.key), sound.time)
@@ -93,7 +81,7 @@ function onPlayChannel1(elem) {
 
 function record(ev: MouseEvent): void {
     if (recordingChannel == 1) {
-        recordTime1 = ev.timeStamp;
+        recordTime1 = ev.timeStamp; //timestamp zwraca czas w milisekundach
         channel1.length = 0;
     } else if (recordingChannel == 2) {
         recordTime2 = ev.timeStamp;
@@ -109,9 +97,9 @@ function record(ev: MouseEvent): void {
 
 function onKeyDown(ev: KeyboardEvent, elem: number): void {
     const key = ev.key;
-    if (recordingChannel == 1) {
+    if (recordingChannel == 1) { 
         const time = ev.timeStamp - recordTime1;
-        channel1.push({ key, time });
+        channel1.push({ key, time }); //który klawisz nacisnęłam o jakim czasie
     } else if (recordingChannel == 2) {
         const time = ev.timeStamp - recordTime2;
         channel2.push({ key, time });
@@ -122,10 +110,11 @@ function onKeyDown(ev: KeyboardEvent, elem: number): void {
         const time = ev.timeStamp - recordTime4;
         channel4.push({ key, time });
     }
+
     playSound(key);
 }
 
-function recordChannel1(elem: number) {
+function recordChannel1(elem: number):void {
     recordingChannel = elem;
     window.addEventListener("keypress", onKey);
     setTimeout(function () {
